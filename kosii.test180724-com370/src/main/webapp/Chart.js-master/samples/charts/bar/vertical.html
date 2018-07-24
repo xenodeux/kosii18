@@ -2,6 +2,7 @@
 <html>
 
 <head>
+<meta charset="UTF-8">
 	<title>Bar Chart</title>
 	<script src="../../../dist/Chart.bundle.js"></script>
 	<script src="../../utils.js"></script>
@@ -27,34 +28,36 @@
 		var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		var color = Chart.helpers.color;
 		var barChartData = {
-			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+			labels: ['January 일월', 'February 이월', 'March 삼월', 'April 사월', 'May 오월', 'June 유월', 'July 칠월'],
 			datasets: [{
-				label: 'Dataset 1',
+				label: 'Dataset 1 라벨1',
 				backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
 				borderColor: window.chartColors.red,
 				borderWidth: 1,
 				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor()
+					1,2,3,4,5,6,7
 				]
 			}, {
-				label: 'Dataset 2',
+				label: 'Dataset 2 라벨2',
 				backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
 				borderColor: window.chartColors.blue,
 				borderWidth: 1,
 				data: [
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor(),
-					randomScalingFactor()
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor(),
+// 					randomScalingFactor()
+					7,6,5,4,3,2,1
 				]
 			}]
 
@@ -72,7 +75,8 @@
 					},
 					title: {
 						display: true,
-						text: 'Chart.js Bar Chart'
+//						display: false,
+						text: 'Chart.js Bar Chart 제목'
 					}
 				}
 			});
