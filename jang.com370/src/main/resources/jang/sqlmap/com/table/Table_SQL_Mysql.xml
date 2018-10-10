@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Table">
+
+	<insert id="TableDAO.insert" parameterClass="jang.com.table.service.TableVO">
+<![CDATA[
+INSERT INTO tb_table
+(table_ID, 
+ table_nm, 
+ COLUMN_NM1, 
+ COLUMN_NM2, 
+ COLUMN_NM3, 
+ USE_AT, 
+ FRST_REGIST_PNTTM)
+VALUES
+( (select ifnull(max(table_id),0) + 1 from tb_table t1), #tableNm#, #columnNm1#, #columnNm2#, #columnNm3#, #useAt#, SYSDATE())
+]]>
+	</insert>
+	<select id="TableDAO.selectList" parameterClass="jang.com.table.service.TableVO"
+		resultClass="egovframework.rte.psl.dataaccess.util.EgovMap">
+ 		<![CDATA[
+			SELECT 
+				*
+			FROM
+				tb_table
+			WHERE
+				1=1
+		]]>	
+		<isNotEmpty property="tableNm">
+		<![CDATA[
+		and table_nm = #tableNm#
+		]]>	
+		</isNotEmpty>		
+		<isNotEmpty property="useAt">
+		<![CDATA[
+		and use_At = #useAt#
+		]]>	
+		</isNotEmpty>		
+		<![CDATA[							
+			ORDER BY table_id desc	
+ 		]]>
+	</select>
+</sqlMap>
