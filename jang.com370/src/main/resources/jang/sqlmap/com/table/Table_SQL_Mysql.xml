@@ -4,18 +4,18 @@
 <sqlMap namespace="Table">
 
 	<insert id="TableDAO.insert" parameterClass="jang.com.table.service.TableVO">
-<![CDATA[
-INSERT INTO tb_table
-(table_ID, 
- table_nm, 
- COLUMN_NM1, 
- COLUMN_NM2, 
- COLUMN_NM3, 
- USE_AT, 
- FRST_REGIST_PNTTM)
-VALUES
-( (select ifnull(max(table_id),0) + 1 from tb_table t1), #tableNm#, #columnNm1#, #columnNm2#, #columnNm3#, #useAt#, SYSDATE())
-]]>
+		<![CDATA[
+		INSERT INTO tb_table
+		(table_ID, 
+		 table_nm, 
+		 COLUMN_NM1, 
+		 COLUMN_NM2, 
+		 COLUMN_NM3, 
+		 USE_AT, 
+		 FRST_REGIST_PNTTM)
+		VALUES
+		( (select ifnull(max(cast(table_id as unsigned)),0) + 1 from tb_table t1), #tableNm#, #columnNm1#, #columnNm2#, #columnNm3#, #useAt#, SYSDATE())
+		]]>
 	</insert>
 	<select id="TableDAO.selectList" parameterClass="jang.com.table.service.TableVO"
 		resultClass="egovframework.rte.psl.dataaccess.util.EgovMap">
@@ -37,8 +37,36 @@ VALUES
 		and use_At = #useAt#
 		]]>	
 		</isNotEmpty>		
+		<isNotEmpty property="columnNm1">
+		<![CDATA[
+		and column_nm1 like concat('%', #columnNm1#, '%')
+		]]>	
+		</isNotEmpty>		
 		<![CDATA[							
 			ORDER BY table_id desc	
  		]]>
 	</select>
+	<select id="TableDAO.select" parameterClass="jang.com.table.service.TableVO"
+		resultClass="egovframework.rte.psl.dataaccess.util.EgovMap">
+ 		<![CDATA[
+			SELECT 
+				*
+			FROM
+				tb_table
+			WHERE
+				table_id = #tableId#
+		]]>	
+	</select>
+	<update id="TableDAO.update">
+		update tb_table set column_nm1 = #columnNm1# where table_id = #tableId#
+	</update>
+	<update id="TableDAO.delete">
+		update tb_table set use_at = 'N' where table_id = #tableId#
+	</update>
+	<update id="TableDAO.rollback">
+		update tb_table set use_at = 'Y'
+	</update>
+	<delete id="TableDAO.delete2">
+		delete from tb_table where table_id = #tableId#
+	</delete>
 </sqlMap>
